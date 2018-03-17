@@ -28,24 +28,24 @@ public class Query extends CmdBase {
 			}
 			
 		}else if(target.equals(CmdSymbo._target.TEMPLATE)) {
-
-			this.queryOperate(CmdSymbo._constraint.TEMPLATE_ID.KEY, container, null);
+			String queryType = this.getSupplement(CmdSymbo._supplement.QUERY.KEY);
+			this.queryOperate(CmdSymbo._constraint.TEMPLATE_ID.KEY, container, queryType);
 			
 		}else if(target.equals(CmdSymbo._target.BRANCH)) {
-			
-			this.queryOperate(CmdSymbo._constraint.BRANCH_ID.KEY, container, null);
+			String queryType = this.getSupplement(CmdSymbo._supplement.QUERY.KEY);
+			this.queryOperate(CmdSymbo._constraint.BRANCH_ID.KEY, container, queryType);
 			
 		}else if(target.equals(CmdSymbo._target.MODULE)) {
-
-			this.queryOperate(CmdSymbo._constraint.MODULE_ID.KEY, container, null);
+			String queryType = this.getSupplement(CmdSymbo._supplement.QUERY.KEY);
+			this.queryOperate(CmdSymbo._constraint.MODULE_ID.KEY, container, queryType);
 			
 		}else if(target.equals(CmdSymbo._target.RELATION)) {
-
-			this.queryOperate(CmdSymbo._constraint.RELATION_ID.KEY, container, null);
+			String queryType = this.getSupplement(CmdSymbo._supplement.QUERY.KEY);
+			this.queryOperate(CmdSymbo._constraint.RELATION_ID.KEY, container, queryType);
 			
 		}else if(target.equals(CmdSymbo._target.FUZZY)) {
-
-			this.queryOperate(CmdSymbo._constraint.FUZZY_ID.KEY, container, null);
+			String queryType = this.getSupplement(CmdSymbo._supplement.QUERY.KEY);
+			this.queryOperate(CmdSymbo._constraint.FUZZY_ID.KEY, container, queryType);
 			
 		}else {
 			this.getReplySelector().operateError(this.toString(),"目标种类未定义");

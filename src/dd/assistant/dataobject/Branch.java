@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import dd.assistant.executable.CmdBase;
@@ -49,7 +50,19 @@ public class Branch extends ElemBase {
 			}
 			Str += "}";
 		}else if(queryType.equals(CmdSymbo._supplement.INTERCONTENT.KEY)){
+			Str += CmdSymbo._supplement.NODENAME.KEY + "=" +this.getAttribute(XmlSymbo.BranchNode._name.tagName) + ";\n";
 			
+			Element program = (Element) this.getInnerNode().getParentNode().getParentNode().getParentNode();
+			Element relationC = (Element) program.getElementsByTagName(XmlSymbo.RelationCollectionNode.tagName).item(0);
+			NodeList relations = relationC.getElementsByTagName(XmlSymbo.RelationNode.tagName);
+			for(int s = relations.getLength();s>0;s--) {
+				String belongs = ((Element)relations.item(s-1)).getAttribute(XmlSymbo.RelationNode._belongs.tagName);
+				if(belongs.equals(this.getId())) {
+					String toOrigin = ((Element)relations.item(s-1)).getAttribute(XmlSymbo.RelationNode._to.tagName);
+					Str += CmdSymbo._target.BRANCH + "=" + toOrigin + ",";
+					Str += CmdSymbo._target.RELATION + "=" + ((Element)relations.item(s-1)).getAttribute(XmlSymbo.RelationNode._to.tagName)+";\n";
+				}
+			}
 		}
 		
 		return Str;
