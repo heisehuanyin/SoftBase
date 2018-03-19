@@ -90,6 +90,35 @@ public class Branch extends ElemBase {
 			this.updateInner(XmlSymbo.BranchNode._is_static.tagName, tmp);
 		
 		
+		tmp= env.getSupplement(CmdSymbo._supplement.INPUT.KEY);
+		if(tmp != null){
+			tmp = tmp.replace("{", "").replace("}", "");
+			String nodes[] = tmp.split(",");
+			for(String n:nodes) {
+				String name = n.split("\\[")[0];
+				String type = n.split("\\[")[1].replace("\\]", "");
+				Element input = this.getInnerNode().getOwnerDocument().createElement(XmlSymbo.BranchNode.InputNode.tagName);
+				input.setAttribute(XmlSymbo.BranchNode.InputNode._name.tagName, name);
+				input.setAttribute(XmlSymbo.BranchNode.InputNode._type.tagName, type);
+				this.getInnerNode().appendChild(input);
+			}
+		}
+		
+		tmp= env.getSupplement(CmdSymbo._supplement.OUTPUT.KEY);
+		if(tmp != null){
+			tmp = tmp.replace("{", "").replace("}", "");
+			String nodes[] = tmp.split(",");
+			for(String n:nodes) {
+				String name = n.split("\\[")[0];
+				String type = n.split("\\[")[1].replace("\\]", "");
+				Element output = this.getInnerNode().getOwnerDocument().createElement(XmlSymbo.BranchNode.OutputNode.tagName);
+				output.setAttribute(XmlSymbo.BranchNode.OutputNode._name.tagName, name);
+				output.setAttribute(XmlSymbo.BranchNode.OutputNode._type.tagName, type);
+				this.getInnerNode().appendChild(output);
+			}
+		}
+		
+		
 	}
 	@Override
 	public Map<String, String> getDefaultValuePair() {
